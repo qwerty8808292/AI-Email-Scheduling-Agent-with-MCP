@@ -45,7 +45,7 @@
 - 判斷是否為重要寄件人（網域 / email）
 - 呼叫模型進行結構化分析（Pydantic schema）
 - 若信件未提供完整時間（只給開始 or 結束，或未明確給出時段），LLM 會依信件內容推理開始時間 (`proposed_start`) 與結束時間 (`proposed_end`)
-- 產出 `analysis` 物件（分類、優先級、風險、會議資訊等），詳見 [分析輸出欄位定義（analysis）](#分析輸出欄位定義analysis)
+- 產出 `analysis` 物件（分類、優先級、風險、會議資訊等），詳見 [分析輸出欄位定義（analysis）](#analysis-fields)
 - 將結果寫入 `email_analysis.json`
 
 #### 優先級評分規則（`priority`）
@@ -76,8 +76,8 @@
   - 若上述 flags 有問題（如衝突 / 週末 / 假日），通常會改為提議替代時段 (`propose_alternative` / `propose_times`)
   - 生成決策（接受、改期、取消、提議替代時段）
   - 若需提議替代時段，會在 prompt 中注入已佔用時段、`holiday.json`，並納入 `pending_slots`（本次執行前面郵件已提議但未確認的時段）避免後續重複提議
-  - 產出 `decision` 物件（action、reply、event 資訊、限制條件標記等），詳見 [Agent 決策輸出欄位定義（decision）](#agent-決策輸出欄位定義decision)
-  - 若 `decision` 缺少必要欄位（例如 `accept_and_add` 沒有 `confirmed_event`），會降級為 `ignore` 以避免錯誤寫入/刪除行事曆
+  - 產出 `decision` 物件（action、reply、event 資訊、限制條件標記等），詳見 [Agent 決策輸出欄位定義（decision）](#decision-fields)
+  - 若 `decision` 缺少必要欄位（例如 `accept_and_add` 沒有 `confirmed_event`），會降級為忽略 (`ignore`) 以避免錯誤寫入/刪除行事曆
   - 必要時呼叫 `add_calendar_event` / `delete_calendar_events`
 
 ## Guardrails 與保護機制
@@ -85,15 +85,15 @@
 這部分是用來避免模型做出未授權承諾或錯誤修改行事曆。
 
 - 雙層防護（未授權承諾風險）
-  - 第一層：若 `analysis.has_risk = true`，強制將 `action` 改為 `escalate`
-  - 第二層：完成決策後再對全部回覆內容做安全掃描，若偵測到未授權的金錢/合約/法律承諾，會再次改為 `escalate`
-  - 後處理：`action = escalate` 時，會清空 `reply`，避免誤送出自動回覆
+  - 第一層：若風險欄位 `analysis.has_risk = true`，強制將動作 (`action`) 改為人工升級 (`escalate`)
+  - 第二層：完成決策後再對全部回覆內容做安全掃描，若偵測到未授權的金錢/合約/法律承諾，會再次改為人工升級 (`escalate`)
+  - 後處理：當動作為 `action = escalate` 時，會清空回覆內容 (`reply`)，避免誤送出自動回覆
 - 非會議信件禁止修改行事曆
-  - 若信件不是「會議邀約」，即使模型回傳 `accept_and_add` / `reschedule` / `cancel`，程式也會攔截並改為 `ignore`
+  - 若信件不是「會議邀約」，即使模型回傳接受並新增 (`accept_and_add`)、改期 (`reschedule`)、取消 (`cancel`)，程式也會攔截並改為 `ignore`
 - 會議寫入前二次驗證
-  - `check_constraints()`：程式端檢查函式，用來判斷時段是否有衝突、是否為週末/假日、是否超出工作時間、以及時間範圍是否有效
-  - `accept_and_add` / `reschedule` 的 `confirmed_event` 需再次通過 `check_constraints()`，避免模型回傳不可行時段仍被寫入行事曆
-- `action = reply_draft` 且有回覆內容時，系統會自動附加 `[草稿｜需人工確認後送出]`
+  - 約束檢查函式 `check_constraints()`：用來判斷時段是否有衝突、是否為週末/假日、是否超出工作時間，以及時間範圍是否有效
+  - `accept_and_add` / `reschedule` 的確認會議 `confirmed_event` 需再次通過 `check_constraints()`，避免模型回傳不可行時段仍被寫入行事曆
+- 當動作為回覆草稿 `action = reply_draft` 且有回覆內容時，系統會自動附加 `[草稿｜需人工確認後送出]`
 
 ## MCP Server 說明
 
@@ -110,6 +110,7 @@
 
 ## 輸出欄位定義
 
+<a id="analysis-fields"></a>
 <details>
 <summary><strong>分析輸出欄位定義（<code>analysis</code>）</strong></summary>
 
@@ -130,6 +131,7 @@
 
 </details>
 
+<a id="decision-fields"></a>
 <details>
 <summary><strong>Agent 決策輸出欄位定義（<code>decision</code>）</strong></summary>
 
