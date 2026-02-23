@@ -42,21 +42,7 @@
 - 讀取 `emails.json`
 - 判斷是否為重要寄件人（網域 / email）
 - 呼叫模型進行結構化分析（Pydantic schema）
-- 產出欄位（`analysis` 物件）：
-  - `email_id`：郵件 ID（對應 `emails.json` 的 `id`）
-  - `category`：郵件分類（`急件` / `一般` / `詢價` / `會議邀約` / `垃圾`）
-  - `priority`：優先級（1~5，數字越高越優先）
-  - `important_sender`：是否為重要寄件人（依網域或寄件者清單判斷）
-  - `needs_reply`：是否需要回覆
-  - `has_risk`：是否涉及未授權承諾風險（如金錢 / 合約 / 法律）
-  - `risk_types`：風險類型清單（`financial_commitment` / `contract_commitment` / `legal_commitment`）
-  - `meeting_intent`：會議意圖（`new` / `reschedule` / `cancel` / `fyi`；非會議可為 `null`）
-  - `time_specified`：信件是否提供明確會議時間
-  - `proposed_start`：模型解析出的提議開始時間（ISO 8601；無則 `null`）
-  - `proposed_end`：模型解析出的提議結束時間（ISO 8601；無則 `null`）
-  - `duration_minutes`：會議時長（分鐘；若無法判定可為 `null`）
-  - `event_information`：會議或任務的摘要資訊（例如議題、活動名稱）
-  - `reply_deadline`：回覆期限（ISO 8601；若信件未提及則 `null`）
+- 產出 `analysis` 物件（分類、優先級、風險、會議資訊等），詳見 [分析輸出欄位定義（analysis）](#分析輸出欄位定義analysis)
 - 將結果寫入 `email_analysis.json`
 
 ### 優先級評分規則（`priority`）
@@ -86,29 +72,10 @@
     - `invalid_range`：開始時間晚於或等於結束時間（時間範圍無效）
   - 若上述 flags 有問題（如衝突 / 週末 / 假日），通常會改為提議替代時段 (`propose_alternative` / `propose_times`)
   - 生成決策（接受、改期、取消、提議替代時段）
+  - 產出 `decision` 物件（action、reply、event 資訊、限制條件標記等），詳見 [Agent 決策輸出欄位定義（decision）](#agent-決策輸出欄位定義decision)
   - 必要時呼叫 `add_calendar_event` / `delete_calendar_events`
 
-
-#### Agent 決策輸出欄位（`decision` 物件）
-
-- `action`：最終動作
-  - `accept_and_add`：接受會議並新增到行事曆
-  - `propose_alternative`：原提議時段不可行，改提 2~3 個替代時段
-  - `propose_times`：對方未提供明確時間，主動提出 2~3 個可行時段
-  - `reschedule`：接受改期，更新既有行程到新時段
-  - `cancel`：接受取消，刪除既有行程
-  - `reply`：可直接回覆信件
-  - `reply_draft`：產生回覆草稿，需人工確認後送出
-  - `escalate`：升級給人工處理（因風險或敏感承諾）
-  - `ignore`：不需處理或不需回覆
-- `reply`：回覆內容
-- `decision_rationale`：決策理由
-- `confirmed_event`：確認後要新增/更新的會議資訊（`title` / `start` / `end`；無則 `null`）
-- `affected_event`：被改期或取消的原會議資訊（無則 `null`）
-- `proposed_alternatives`：替代時段清單（2~3 個候選時段；無則 `null`）
-- `constraints_applied`：實際觸發的限制條件
-
-### 3. Guardrails 與保護機制
+## Guardrails 與保護機制
 
 - 雙層防護（未授權承諾風險）
   - 第一層：若 `analysis.has_risk = true`，強制將 `action` 改為 `escalate`
@@ -129,6 +96,44 @@
 - `add_calendar_event(start, end)`：新增行程
 - `delete_calendar_events(start, end)`：依起訖時間刪除行程
 - `backup_calendar()`：建立處理前備份（額外工具）
+
+## 輸出欄位定義
+
+### 分析輸出欄位定義（`analysis`）
+
+- `email_id`：郵件 ID（對應 `emails.json` 的 `id`）
+- `category`：郵件分類（`急件` / `一般` / `詢價` / `會議邀約` / `垃圾`）
+- `priority`：優先級（1~5，數字越高越優先）
+- `important_sender`：是否為重要寄件人（依網域或寄件者清單判斷）
+- `needs_reply`：是否需要回覆
+- `has_risk`：是否涉及未授權承諾風險（如金錢 / 合約 / 法律）
+- `risk_types`：風險類型清單（`financial_commitment` / `contract_commitment` / `legal_commitment`）
+- `meeting_intent`：會議意圖（`new` / `reschedule` / `cancel` / `fyi`；非會議可為 `null`）
+- `time_specified`：信件是否提供明確會議時間
+- `proposed_start`：模型解析出的提議開始時間（ISO 8601；無則 `null`）
+- `proposed_end`：模型解析出的提議結束時間（ISO 8601；無則 `null`）
+- `duration_minutes`：會議時長（分鐘；若無法判定可為 `null`）
+- `event_information`：會議或任務的摘要資訊（例如議題、活動名稱）
+- `reply_deadline`：回覆期限（ISO 8601；若信件未提及則 `null`）
+
+### Agent 決策輸出欄位定義（`decision`）
+
+- `action`：最終動作
+  - `accept_and_add`：接受會議並新增到行事曆
+  - `propose_alternative`：原提議時段不可行，改提 2~3 個替代時段
+  - `propose_times`：對方未提供明確時間，主動提出 2~3 個可行時段
+  - `reschedule`：接受改期，更新既有行程到新時段
+  - `cancel`：接受取消，刪除既有行程
+  - `reply`：可直接回覆信件
+  - `reply_draft`：產生回覆草稿，需人工確認後送出
+  - `escalate`：升級給人工處理（因風險或敏感承諾）
+  - `ignore`：不需處理或不需回覆
+- `reply`：回覆內容
+- `decision_rationale`：決策理由
+- `confirmed_event`：確認後要新增/更新的會議資訊（`title` / `start` / `end`；無則 `null`）
+- `affected_event`：被改期或取消的原會議資訊（無則 `null`）
+- `proposed_alternatives`：替代時段清單（2~3 個候選時段；無則 `null`）
+- `constraints_applied`：實際觸發的限制條件
 
 
 ## 環境需求
