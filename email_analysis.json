@@ -1,0 +1,512 @@
+[
+  {
+    "email_raw": {
+      "id": "EM013",
+      "sender": "partner_2@global_tech.com",
+      "subject": "更改：關於 1/27 的視訊會議",
+      "timestamp": "2026-01-19T21:00:00",
+      "content": "抱歉，之前說 1/27 下午不方便，能不能改到 1/23 下午 2 ~ 4 點？"
+    },
+    "analysis": {
+      "email_id": "EM013",
+      "category": "會議邀約",
+      "priority": 5,
+      "important_sender": true,
+      "needs_reply": true,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": "reschedule",
+      "time_specified": true,
+      "proposed_start": "2026-01-23T14:00:00",
+      "proposed_end": "2026-01-23T16:00:00",
+      "duration_minutes": 120,
+      "event_information": "關於 1/27 的視訊會議",
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "reschedule",
+      "reply": "沒問題，已將會議時間更新為 1/23 (週五) 下午 2:00 - 4:00。期待屆時與您線上見。",
+      "decision_rationale": "此為重要合作夥伴提出的會議改期請求。經查核，對方提議的新時段 1/23 下午 2-4 點並無任何衝突，且符合所有排程限制。因此，接受改期，並更新行事曆上的原定會議與新會議時間。",
+      "confirmed_event": {
+        "title": "合作廠商會議 (partner_2)",
+        "start": "2026-01-23T14:00:00",
+        "end": "2026-01-23T16:00:00"
+      },
+      "affected_event": {
+        "title": "合作廠商會議 (partner_2)",
+        "start": "2026-01-27T14:00:00",
+        "end": "2026-01-27T16:00:00"
+      },
+      "proposed_alternatives": null,
+      "constraints_applied": []
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM001",
+      "sender": "boss@company.com",
+      "subject": "緊急！明早董事會報告",
+      "timestamp": "2026-01-19T09:00:00",
+      "content": "小王，我剛看了一下你準備的 A 專案簡報，數據好像有點出入。請在今天下班前修正並回傳給我，這非常重要！"
+    },
+    "analysis": {
+      "email_id": "EM001",
+      "category": "急件",
+      "priority": 5,
+      "important_sender": true,
+      "needs_reply": true,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": null,
+      "time_specified": false,
+      "proposed_start": null,
+      "proposed_end": null,
+      "duration_minutes": null,
+      "event_information": "明早董事會報告",
+      "reply_deadline": "2026-01-19T18:00:00"
+    },
+    "decision": {
+      "action": "reply_draft",
+      "reply": "好的，老闆。我會立刻檢查數據問題，並在今天下班前將修正後的簡報寄給您。\n[草稿｜需人工確認後送出]",
+      "decision_rationale": "此為直屬主管的緊急工作指示，要求在今日下班前回覆修正後的簡報。由於任務內容（修正數據）需要本人親自處理，AI 無法代勞，因此擬定一封確認收到並承諾完成的回覆草稿，供主管檢視後發送。",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": null,
+      "constraints_applied": []
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM002",
+      "sender": "partner@global_tech.com",
+      "subject": "1/20 合作洽談邀約",
+      "timestamp": "2026-01-19T10:30:00",
+      "content": "您好，想與您討論 Q1 的技術整合計畫。不知道明天（1/20）下午 2:00 您方便開個半小時的視訊會議嗎？"
+    },
+    "analysis": {
+      "email_id": "EM002",
+      "category": "會議邀約",
+      "priority": 4,
+      "important_sender": true,
+      "needs_reply": true,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": "new",
+      "time_specified": true,
+      "proposed_start": "2026-01-20T14:00:00",
+      "proposed_end": "2026-01-20T14:30:00",
+      "duration_minutes": 30,
+      "event_information": "與您討論 Q1 的技術整合計畫",
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "propose_alternative",
+      "reply": "您好，\n\n感謝您的邀約，我們非常樂意與您討論 Q1 的技術整合計畫。\n\n不巧的是，明天（1/20）下午 2:00 我已有會議安排，無法參加。\n\n想請問以下幾個時段您是否方便？\n- 1/20 (二) 上午 10:00 - 10:30\n- 1/21 (三) 下午 2:00 - 2:30\n- 1/22 (四) 上午 10:30 - 11:00\n\n如果以上時間皆不適合，也歡迎您提出其他方便的時段。\n\n期待與您線上見！",
+      "decision_rationale": "此為重要合作夥伴的會議邀約，但對方提議的時段 (1/20 14:00) 與已排定的『AI 巔峰論壇』(13:00-17:00) 衝突。因此，我將婉拒原時段，並根據行事曆空檔提出三個替代方案，以利會議盡快舉行。",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": [
+        {
+          "title": "合作洽談",
+          "start": "2026-01-20T10:00:00",
+          "end": "2026-01-20T10:30:00"
+        },
+        {
+          "title": "合作洽談",
+          "start": "2026-01-21T14:00:00",
+          "end": "2026-01-21T14:30:00"
+        },
+        {
+          "title": "合作洽談",
+          "start": "2026-01-22T10:30:00",
+          "end": "2026-01-22T11:00:00"
+        }
+      ],
+      "constraints_applied": [
+        "conflict"
+      ]
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM010",
+      "sender": "conference@ai_summit.org",
+      "subject": "【確認信】您已成功報名 AI 巔峰論壇",
+      "timestamp": "2026-01-19T18:00:00",
+      "content": "感謝您的參與，論壇將於 1/20 13:00 - 17:00 舉行，地點於台北國際會議中心。"
+    },
+    "analysis": {
+      "email_id": "EM010",
+      "category": "會議邀約",
+      "priority": 4,
+      "important_sender": false,
+      "needs_reply": false,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": "fyi",
+      "time_specified": true,
+      "proposed_start": "2026-01-20T13:00:00",
+      "proposed_end": "2026-01-20T17:00:00",
+      "duration_minutes": 240,
+      "event_information": "AI 巔峰論壇 at 台北國際會議中心",
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "ignore",
+      "reply": "",
+      "decision_rationale": "此為 AI 巔峰論壇的報名成功確認信。經查，該活動已存在於行事曆中 (2026-01-20 13:00-17:00)，故無需採取任何動作。",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": null,
+      "constraints_applied": [
+        "conflict"
+      ]
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM005",
+      "sender": "old_friend@gmail.com",
+      "subject": "好久不見！ 1/21 聚餐？",
+      "timestamp": "2026-01-19T14:20:00",
+      "content": "嘿，我 1/21 整天都會在你們辦公室附近，要不要中午一起吃個飯？"
+    },
+    "analysis": {
+      "email_id": "EM005",
+      "category": "會議邀約",
+      "priority": 3,
+      "important_sender": false,
+      "needs_reply": true,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": "new",
+      "time_specified": true,
+      "proposed_start": "2026-01-21T12:00:00",
+      "proposed_end": "2026-01-21T13:00:00",
+      "duration_minutes": 60,
+      "event_information": "聚餐",
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "accept_and_add",
+      "reply": "好久不見！當然好，1/21 中午 12:00 沒問題。到時候約在哪裡碰面？期待見到你！",
+      "decision_rationale": "此為朋友的午餐邀約，提議時間 2026-01-21 中午 12:00-13:00。經查核，該時段無會議衝突，且非假日或休息時間，所有 Constraint Flags 皆為 False，故可直接接受並加入行事曆。",
+      "confirmed_event": {
+        "title": "與 old_friend@gmail.com 聚餐",
+        "start": "2026-01-21T12:00:00",
+        "end": "2026-01-21T13:00:00"
+      },
+      "affected_event": null,
+      "proposed_alternatives": null,
+      "constraints_applied": []
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM012",
+      "sender": "service@cloud_provider.tw",
+      "subject": "系統維護說明：1/25 14:00 會議",
+      "timestamp": "2026-01-19T20:00:00",
+      "content": "您好，關於貴司託管伺服器的升級計畫，我們想在 1/25 14:00 撥個電話與您同步進度，請問您方便嗎？"
+    },
+    "analysis": {
+      "email_id": "EM012",
+      "category": "會議邀約",
+      "priority": 3,
+      "important_sender": false,
+      "needs_reply": true,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": "new",
+      "time_specified": true,
+      "proposed_start": "2026-01-25T14:00:00",
+      "proposed_end": "2026-01-25T15:00:00",
+      "duration_minutes": 60,
+      "event_information": "系統維護說明",
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "propose_alternative",
+      "reply": "您好，感謝您的邀約。由於 1/25 (日) 為週末，該時段不方便。想與您約在平日討論，請問以下幾個時段您是否方便？ 1. 1/21 (三) 15:00-16:00 2. 1/22 (四) 09:00-10:00 3. 1/23 (五) 10:00-11:00 若以上時間皆不方便，再麻煩您提出幾個方便的時段，謝謝。",
+      "decision_rationale": "此為會議邀約，但提議時間 2026-01-25 14:00 為週日，is_weekend flag 為 True。因此，我將拒絕原時段並提出三個平日的可行時段。",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": [
+        {
+          "title": "系統維護說明",
+          "start": "2026-01-21T15:00:00",
+          "end": "2026-01-21T16:00:00"
+        },
+        {
+          "title": "系統維護說明",
+          "start": "2026-01-22T09:00:00",
+          "end": "2026-01-22T10:00:00"
+        },
+        {
+          "title": "系統維護說明",
+          "start": "2026-01-23T10:00:00",
+          "end": "2026-01-23T11:00:00"
+        }
+      ],
+      "constraints_applied": [
+        "weekend"
+      ]
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM011",
+      "sender": "vendor@global_parts.com",
+      "subject": "【年度結算】2/16(一) 早上線上對帳確認",
+      "timestamp": "2026-01-19T19:00:00",
+      "content": "您好，為了結算年度帳務，想跟您預約下個月 2/16（一）早上 10:00 進行年度對帳。需請您抽空參與，再請確認是否方便。"
+    },
+    "analysis": {
+      "email_id": "EM011",
+      "category": "會議邀約",
+      "priority": 3,
+      "important_sender": false,
+      "needs_reply": true,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": "new",
+      "time_specified": true,
+      "proposed_start": "2026-02-16T10:00:00",
+      "proposed_end": "2026-02-16T11:00:00",
+      "duration_minutes": 60,
+      "event_information": "年度結算線上對帳確認",
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "propose_alternative",
+      "reply": "您好，感謝您的邀約。不巧的是，您提議的 2/16 (一) 適逢農曆春節假期，我將無法參加。請問以下幾個時段您是否方便？ 1. 2/23 (一) 10:00-11:00 2. 2/24 (二) 14:00-15:00 3. 2/25 (三) 11:00-12:00 若以上時間皆不方便，再請您提供其他可行的時段。謝謝您。",
+      "decision_rationale": "此為廠商的年度對帳會議邀約，但提議時間 2026-02-16 為農曆除夕假日，因此無法接受。根據規則，應提出替代方案。我將提議農曆年後的第一週三個時段供對方選擇。",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": [
+        {
+          "title": "年度結算線上對帳確認",
+          "start": "2026-02-23T10:00:00",
+          "end": "2026-02-23T11:00:00"
+        },
+        {
+          "title": "年度結算線上對帳確認",
+          "start": "2026-02-24T14:00:00",
+          "end": "2026-02-24T15:00:00"
+        },
+        {
+          "title": "年度結算線上對帳確認",
+          "start": "2026-02-25T11:00:00",
+          "end": "2026-02-25T12:00:00"
+        }
+      ],
+      "constraints_applied": [
+        "holiday"
+      ]
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM004",
+      "sender": "hr@company.com",
+      "subject": "員工滿意度調查 (需於 1/23 前完成)",
+      "timestamp": "2026-01-19T13:00:00",
+      "content": "各位同仁好，為了優化辦公環境，請花 5 分鐘填寫這份匿名問卷。"
+    },
+    "analysis": {
+      "email_id": "EM004",
+      "category": "一般",
+      "priority": 3,
+      "important_sender": true,
+      "needs_reply": false,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": null,
+      "time_specified": false,
+      "proposed_start": null,
+      "proposed_end": null,
+      "duration_minutes": null,
+      "event_information": null,
+      "reply_deadline": "2026-01-23T23:59:59"
+    },
+    "decision": {
+      "action": "ignore",
+      "reply": "",
+      "decision_rationale": "此為內部員工滿意度調查通知，由人資部門發出，要求在 1/23 前完成。信件內容為單向通知，不需回覆，也非會議邀約，因此無須進行任何操作。",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": null,
+      "constraints_applied": []
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM006",
+      "sender": "customer_service@bank.com",
+      "subject": "您的信用卡帳單已產生",
+      "timestamp": "2026-01-19T15:00:00",
+      "content": "提醒您，您 1 月份的信用卡帳單為 NT$ 12,500，繳款截止日為 1/25。"
+    },
+    "analysis": {
+      "email_id": "EM006",
+      "category": "一般",
+      "priority": 2,
+      "important_sender": false,
+      "needs_reply": false,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": null,
+      "time_specified": false,
+      "proposed_start": null,
+      "proposed_end": null,
+      "duration_minutes": null,
+      "event_information": null,
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "ignore",
+      "reply": "",
+      "decision_rationale": "此為銀行信用卡帳單通知，僅為資訊性質，無需回覆或安排任何動作。主管會自行處理繳款事宜。",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": null,
+      "constraints_applied": []
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM007",
+      "sender": "potential_client@startup.io",
+      "subject": "產品詢價：關於 Agentic 解決方案",
+      "timestamp": "2026-01-19T16:10:00",
+      "content": "您好，我們對貴公司的 AI Agent 產品很感興趣，預計部署規模為 50 人，希望能獲得初步的報價單。"
+    },
+    "analysis": {
+      "email_id": "EM007",
+      "category": "詢價",
+      "priority": 2,
+      "important_sender": false,
+      "needs_reply": true,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": null,
+      "time_specified": false,
+      "proposed_start": null,
+      "proposed_end": null,
+      "duration_minutes": null,
+      "event_information": null,
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "escalate",
+      "reply": "",
+      "decision_rationale": "此為潛在客戶的產品詢價，涉及具體的報價。報價屬於關鍵商業資訊，不應由 AI 直接回覆。因此，我將草擬一封標準回覆，表明已收到請求並將由業務團隊跟進，供主管檢視後加入具體報價資訊再寄出。 (安全掃描攔截：回覆內容涉及未授權承諾)",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": null,
+      "constraints_applied": []
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM008",
+      "sender": "newsletter@tech_daily.com",
+      "subject": "每日技術早報：OpenAI 最新進展",
+      "timestamp": "2026-01-19T08:00:00",
+      "content": "今天最值得關注的 AI 新聞包括..."
+    },
+    "analysis": {
+      "email_id": "EM008",
+      "category": "一般",
+      "priority": 2,
+      "important_sender": false,
+      "needs_reply": false,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": null,
+      "time_specified": false,
+      "proposed_start": null,
+      "proposed_end": null,
+      "duration_minutes": null,
+      "event_information": null,
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "ignore",
+      "reply": "",
+      "decision_rationale": "此為每日技術早報，屬於資訊類信件，不需回覆或採取任何行動。",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": null,
+      "constraints_applied": []
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM009",
+      "sender": "no-reply@uber.com",
+      "subject": "您的行程收據",
+      "timestamp": "2026-01-19T17:30:00",
+      "content": "感謝您搭乘 Uber，本次車資為 NT$ 250。"
+    },
+    "analysis": {
+      "email_id": "EM009",
+      "category": "一般",
+      "priority": 2,
+      "important_sender": false,
+      "needs_reply": false,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": null,
+      "time_specified": false,
+      "proposed_start": null,
+      "proposed_end": null,
+      "duration_minutes": null,
+      "event_information": null,
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "ignore",
+      "reply": "",
+      "decision_rationale": "此為 Uber 行程收據，僅為通知性質，寄件者為 no-reply，無需回覆或採取任何行動。",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": null,
+      "constraints_applied": []
+    }
+  },
+  {
+    "email_raw": {
+      "id": "EM003",
+      "sender": "marketing@spam_service.net",
+      "subject": "【限時優惠】提升你的 LinkedIn 觸及率",
+      "timestamp": "2026-01-19T11:15:00",
+      "content": "想要更多精準客戶嗎？點擊連結即可獲得 7 天免費試用，保證讓您的業績成長 300%！"
+    },
+    "analysis": {
+      "email_id": "EM003",
+      "category": "垃圾",
+      "priority": 1,
+      "important_sender": false,
+      "needs_reply": false,
+      "has_risk": false,
+      "risk_types": [],
+      "meeting_intent": null,
+      "time_specified": false,
+      "proposed_start": null,
+      "proposed_end": null,
+      "duration_minutes": null,
+      "event_information": null,
+      "reply_deadline": null
+    },
+    "decision": {
+      "action": "ignore",
+      "reply": "",
+      "decision_rationale": "此為一封來自非重要寄件者的行銷/垃圾郵件，內容為服務推廣，無需回覆或採取任何行動。",
+      "confirmed_event": null,
+      "affected_event": null,
+      "proposed_alternatives": null,
+      "constraints_applied": []
+    }
+  }
+]

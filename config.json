@@ -1,0 +1,10 @@
+{
+    "model": "gemini-2.5-pro",
+    "current_datetime": "2026-01-19T09:00:00",
+    "timezone": "Asia/Taipei",
+    "work_hours": {
+        "start": 9,
+        "end": 18
+    },
+    "log_level": "INFO"
+}

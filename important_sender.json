@@ -1,0 +1,9 @@
+{
+  "important_domains": [
+    "company.com"
+  ],
+  "important_senders": [
+    "partner@global_tech.com",
+    "partner_2@global_tech.com"
+  ]
+}
