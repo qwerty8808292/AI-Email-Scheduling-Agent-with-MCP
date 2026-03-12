@@ -7,6 +7,20 @@
 - 支援會議衝突、週末、國定假日（含除夕）、工作時段等約束檢查
 - 具 Guardrails：未授權承諾風險升級與回覆內容安全掃描
 
+## 更新紀錄
+
+### 2026-03-12：新增 `tests/` 自動化測試目錄
+- 測試檔包含：
+  - `tests/test_email_analyzer.py`：測試重要寄件人判斷與時間格式正規化邏輯
+  - `tests/test_agent.py`：測試 `check_constraints()`、`sort_emails()` 與回覆安全掃描規則
+  - `tests/test_process_email.py`：測試 `process_email()` 在接受會議、阻擋非會議修改、風險升級、草稿、衝突 fallback 等流程
+  - `tests/test_calendar_mcp.py`：測試行事曆讀取、事件新增/刪除、重複時段攔截與備份檔建立行為
+- 測試指令：
+
+```bash
+python -m unittest discover -s tests
+```
+
 ## 目錄
 
 - [專案架構](#專案架構)
